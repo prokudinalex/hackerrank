@@ -6,6 +6,8 @@ public class MinimumSwaps {
     static int minimumSwaps(int[] arr) {
         int len = arr.length;
         int result = 0;
+
+        // how many swaps are needed (minimum) to have initial array
         for (int i = 0; i < len; i++) {
             int swapped = arr[i] - 1;
             while (swapped != i) {

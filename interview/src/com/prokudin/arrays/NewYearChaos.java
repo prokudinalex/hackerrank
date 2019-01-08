@@ -6,6 +6,8 @@ public class NewYearChaos {
     static void minimumBribes(int[] q) {
         int len = q.length;
         int result = 0;
+
+        // count amount of persons which bribed current element
         for (int i = 0; i < len; i++) {
             int bribe = q[i] - i - 1;
             if (bribe > 2) {

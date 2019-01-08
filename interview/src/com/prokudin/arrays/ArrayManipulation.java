@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class ArrayManipulation {
     static long arrayManipulation(int n, int[][] queries) {
+        // will keep only difference between i and i-1 elements
+        // so will not need to track the whole interval, as middle difference will = 0
         long[] diffs = new long[n];
         int queriesCount = queries.length;
         long max = Long.MIN_VALUE;
@@ -16,6 +18,7 @@ public class ArrayManipulation {
             }
         }
 
+        // just need to sum up diffs and check the max
         long tmp = 0;
         for (int i = 0; i < n; i++) {
             tmp += diffs[i];
