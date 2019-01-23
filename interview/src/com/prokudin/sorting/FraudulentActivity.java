@@ -20,52 +20,46 @@ public class FraudulentActivity {
         int result = 0;
         int n = expenditure.length;
         for (int i = d; i < n; i++) {
-            double median = getMedian(window, d);
+            int bound = getBound(window, d);
             //System.out.println(String.format("%f %s", median, window));
 
-            if (expenditure[i] >= 2 * median) {
+            if (expenditure[i] >= bound) {
                 result++;
             }
 
             if (i != n - 1) {
-                moveWindow(window, d, expenditure[i], expenditure[i - d], median);
+                moveWindow(window, d, expenditure[i], expenditure[i - d]);
             }
         }
         return result;
     }
 
-    private static void moveWindow(List<Integer> window, int d, int toAdd, int toRemove, double median) {
+    private static void moveWindow(List<Integer> window, int d, int toAdd, int toRemove) {
         // at first find element to remove and remove it
-        int removeIndex = (toRemove > median) ? window.lastIndexOf(toRemove) : window.indexOf(toRemove);
+        int removeIndex = Collections.binarySearch(window, toRemove);
+        if (toAdd == toRemove) {
+            return;
+        }
         window.remove(removeIndex);
 
-        int addIndex  = findAddIndex(window, d - 1, toAdd, median);
+        int addIndex  = findAddIndex(window, toAdd);
         window.add(addIndex, toAdd);
     }
 
-    private static int findAddIndex(List<Integer> window, int d, int toAdd, double median) {
-        if (toAdd < median) {
-            for (int i = 0; i < d - 1; i++) {
-                if (window.get(i + 1) > toAdd) {
-                    return i;
-                }
-            }
-            return d - 1;
-        } else {
-            for (int i = d; i > 1; i--) {
-                if (window.get(i - 1) <= toAdd) {
-                    return i;
-                }
-            }
+    private static int findAddIndex(List<Integer> window, int toAdd) {
+        int index = Collections.binarySearch(window, toAdd);
+        if (0 > index) {
+            index = -index - 1;
         }
-        return 0;
+
+        return index;
     }
 
-    private static double getMedian(List<Integer> window, int d) {
+    private static int getBound(List<Integer> window, int d) {
         if (d % 2 == 1) {
-            return window.get(d / 2);
+            return window.get(d / 2) * 2;
         }
-        return (window.get(d / 2) + window.get(d / 2 - 1)) / 2.0;
+        return window.get(d / 2) + window.get(d / 2 - 1);
     }
 
     private static final Scanner scan = new Scanner(System.in);
@@ -79,7 +73,7 @@ public class FraudulentActivity {
         String[] strings = scan.nextLine().split(" ");
         scan.skip("(\r\n|[\n\r]?)");
         for (int i = 0; i < n; i++) {
-            items[i] = Integer.valueOf(strings[i]);
+            items[i] = Integer.parseInt(strings[i]);
         }
 
         int result = activityNotifications(items, d);
