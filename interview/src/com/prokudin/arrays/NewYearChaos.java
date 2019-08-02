@@ -3,7 +3,7 @@ package com.prokudin.arrays;
 import java.util.Scanner;
 
 public class NewYearChaos {
-    static void minimumBribes(int[] q) {
+    private static void minimumBribes(int[] q) {
         int len = q.length;
         int result = 0;
 
@@ -24,24 +24,15 @@ public class NewYearChaos {
         System.out.println(result);
     }
 
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        int t = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        Scanner scanner = new Scanner(System.in);
+        int testCount = scanner.nextInt();
 
-        for (int tItr = 0; tItr < t; tItr++) {
+        for (int test = 0; test < testCount; test++) {
             int n = scanner.nextInt();
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
             int[] q = new int[n];
-
-            String[] qItems = scanner.nextLine().split(" ");
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
             for (int i = 0; i < n; i++) {
-                int qItem = Integer.parseInt(qItems[i]);
-                q[i] = qItem;
+                q[i] = scanner.nextInt();
             }
 
             minimumBribes(q);
