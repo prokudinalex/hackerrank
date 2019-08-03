@@ -1,7 +1,6 @@
 package com.prokudin.sorting;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ public class CountInversions {
                 answers.add(countInversions(values));
             }
         }
-
 
         answers.forEach(System.out::println);
     }
