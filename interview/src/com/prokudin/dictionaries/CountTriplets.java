@@ -1,24 +1,19 @@
 package com.prokudin.dictionaries;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Scanner;
 
 public class CountTriplets {
-
-    static long countTriplets(List<Long> arr, long r) {
-        long[] sum = {0};
+    private static long countTriplets(List<Long> arr, long r) {
+        long sum = 0;
 
         Map<Long, Long> tempTripletCount = new HashMap<>();
         Map<Long, Long> tripletCount = new HashMap<>();
         for (Long item : arr) {
-            sum[0] += tripletCount.getOrDefault(item, 0L);
+            sum += tripletCount.getOrDefault(item, 0L);
 
             if (tempTripletCount.containsKey(item)) {
                 tripletCount.put(item * r,
@@ -27,23 +22,21 @@ public class CountTriplets {
 
             tempTripletCount.put(item * r, tempTripletCount.getOrDefault(item * r, 0L) + 1);
         }
-        return sum[0];
+        return sum;
     }
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        String[] nr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
-        int n = Integer.parseInt(nr[0]);
-        long r = Long.parseLong(nr[1]);
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        long r = scan.nextLong();
 
-        List<Long> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-                .map(Long::parseLong)
-                .collect(toList());
+        List<Long> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(scan.nextLong());
+        }
+        scan.close();
 
         long ans = countTriplets(arr, r);
-
         System.out.println(ans);
-
-        bufferedReader.close();
     }
 }

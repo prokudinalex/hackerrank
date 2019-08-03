@@ -22,13 +22,11 @@ public class TwoStrings {
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int q = scan.nextInt();
+        int testCount = scan.nextInt();
         scan.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int i = 0; i < q; i++) {
+        for (int i = 0; i < testCount; i++) {
             String s1 = scan.nextLine();
             String s2 = scan.nextLine();
-
             System.out.println(twoStrings(s1, s2));
         }
     }

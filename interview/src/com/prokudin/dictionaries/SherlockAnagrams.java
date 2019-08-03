@@ -33,7 +33,6 @@ public class SherlockAnagrams {
         for (int i = 0; i < strings.length; i++) {
             for (int j = i + 1; j < strings.length; j++) {
                 if (isAnagram(strings[i], strings[j])) {
-                    //System.out.println(String.format("Pair: %s %s", strings[i], strings[j]));
                     count++;
                 }
             }
@@ -55,25 +54,17 @@ public class SherlockAnagrams {
     private static Map<Character, Integer> getCharacterMap(String s) {
         Map<Character, Integer> result = new HashMap<>();
         for (char c : s.toCharArray()) {
-            result.compute(c, (key, value) -> {
-                if (null == value) {
-                    return 1;
-                }
-                return value + 1;
-            });
+            result.put(c, result.getOrDefault(c, 0) + 1);
         }
         return result;
     }
 
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        int q = scanner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int testCount = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int qItr = 0; qItr < q; qItr++) {
+        for (int i = 0; i < testCount; i++) {
             String s = scanner.nextLine();
-
             int result = sherlockAndAnagrams(s);
             System.out.println(result);
         }
