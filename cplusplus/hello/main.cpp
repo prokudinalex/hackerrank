@@ -8,6 +8,6 @@ int printHello() {
 }
 
 int main() {
-    dataTypesRun();
+    conditionalRun();
     return 0;
 }
