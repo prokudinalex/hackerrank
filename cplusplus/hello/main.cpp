@@ -8,5 +8,6 @@ int printHello() {
 }
 
 int main() {
-    return ioRun();
+    dataTypesRun();
+    return 0;
 }

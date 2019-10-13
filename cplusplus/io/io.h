@@ -5,6 +5,7 @@
 #ifndef CPLUSPLUS_IO_H
 #define CPLUSPLUS_IO_H
 
-int ioRun();
+void ioRun();
+void dataTypesRun();
 
 #endif //CPLUSPLUS_IO_H
