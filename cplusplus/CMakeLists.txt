@@ -3,4 +3,4 @@ project(cplusplus)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(cplusplus hello/main.cpp)
+add_executable(cplusplus hello/main.cpp io/io.cpp io/io.h)
