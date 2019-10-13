@@ -7,5 +7,6 @@
 
 void ioRun();
 void dataTypesRun();
+void conditionalRun();
 
 #endif //CPLUSPLUS_IO_H
